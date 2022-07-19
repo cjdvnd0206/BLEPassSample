@@ -15,10 +15,12 @@ struct ContentView: View {
             TextField("번호입력", text: $viewModel.id)
                 .frame(width: 200, alignment: .center)
                 .textFieldStyle(.roundedBorder)
-            Button("문열기", action: viewModel.setupCentralManager)
+                .disabled(viewModel.isSending)
+            Button(viewModel.buttonText, action: viewModel.buttonToggle)
                 .disabled(viewModel.id.isEmpty)
                 .padding()
         }
+        .onAppear(perform: viewModel.setupCentralManager)
         
     }
 }
